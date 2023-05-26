@@ -15,7 +15,7 @@ public class HelloController {
 	@RequestMapping(value="/hello",method = {RequestMethod.GET,RequestMethod.POST})
 	public String hello() {
 		System.out.println("HelloController.hello~");
-		
+		System.out.println("HelloController.hello~");
 		return "/WEB-INF/views/hello.jsp";
 	}
 }

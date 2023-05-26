@@ -110,7 +110,8 @@ public class UserController {
 		//세션에 있는 name 변경
 		String name = userVo.getName();
 		authUser.setName(name);
-		return "";
+		userService.modify(userVo);
+		return "redirect:/main";
 	}
 	
 	

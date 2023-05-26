@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div id="header">
+	<%-- <div id="header">
 		<h1>
 			<a href="${pageContext.request.contextPath}/main">MySite ${sessionScope.authUser.name}</a>
 		</h1>
@@ -23,8 +23,8 @@
 			<c:otherwise>
 				<ul>
 					<li>${sessionScope.authUser.name}님안녕하세요^^</li>
-					<li><a href="${pageContext.request.contextPath}/user/logout">로그아웃</a></li>
-					<li><a href="${pageContext.request.contextPath}/user/modifyForm">회원정보수정</a></li>
+					<li><a href="${pageContext.request.contextPath}//user/logout">로그아웃</a></li>
+					<li><a href="${pageContext.request.contextPath}//user/modifyForm">회원정보수정</a></li>
 				</ul>
 			</c:otherwise>
 		</c:choose>
@@ -41,6 +41,17 @@
 			</ul> -->
 
 	</div>
-	<!-- //header -->
+	<!-- //header --> --%>
+	
+	<div id="nav">
+			<ul>
+				<li><a href="${pageContext.request.contextPath}/guestbook/addList.jsp">방명록</a></li>
+				<li><a href="">갤러리</a></li>
+				<li><a href="${pageContext.request.contextPath}/include/list.jsp">게시판</a></li>
+				<li><a href="">입사지원서</a></li>
+			</ul>
+			<div class="clear"></div>
+		</div>
+		<!-- //nav -->
 </body>
 </html>

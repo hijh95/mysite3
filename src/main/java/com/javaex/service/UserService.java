@@ -31,13 +31,6 @@ public class UserService {
 	}
 	
 	
-	/*
-	 * //로그인 폼 public void login(UserVo userVo) {
-	 * System.out.println("UserService.login");
-	 * 
-	 * 
-	 * }
-	 */
 	
 	/* 회원정보수정폼 */
 	public UserVo modifyForm(int no) {
@@ -47,5 +40,12 @@ public class UserService {
 		return userVo;
 	}
 	
+	
+	public void modify(UserVo userVo) {
+		System.out.println("UserService.modify()");
+		System.out.println(userVo);
+		
+		userDao.updateUser(userVo);
+	}
 	
 }

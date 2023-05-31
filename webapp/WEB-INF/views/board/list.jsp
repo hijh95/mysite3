@@ -1,13 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-        <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="${pageContext.request.contextPath}/assets/css/mysite.css" rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath}/assets/css/board.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/assets/css/mysite.css"
+	rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/assets/css/board.css"
+	rel="stylesheet" type="text/css">
 
 </head>
 
@@ -15,139 +18,123 @@
 <body>
 	<div id="wrap">
 
+		<!-- 해더 네비 -->
 		<c:import url="/WEB-INF/views/include/header.jsp"></c:import>
-		
-		<div id="nav">
-			<ul>
-				<li><a href="">방명록</a></li>
-				<li><a href="">갤러리</a></li>
-				<li><a href="">게시판</a></li>
-				<li><a href="">입사지원서</a></li>
-			</ul>
-			<div class="clear"></div>
-		</div>
-		<!-- //nav -->
+		<!-- //해더 네비 -->
 
-		<div id="aside">
-			<h2>게시판</h2>
-			<ul>
-				<li><a href="">일반게시판</a></li>
-				<li><a href="">댓글게시판</a></li>
-			</ul>
-		</div>
-		<!-- //aside -->
 
-		<div id="content">
+		<div id="container" class="clearfix">
 
-			<div id="content-head">
-				<h3>게시판</h3>
-				<div id="location">
-					<ul>
-						<li>홈</li>
-						<li>게시판</li>
-						<li class="last">일반게시판</li>
-					</ul>
-				</div>
-				<div class="clear"></div>
+			<div id="aside">
+				<h2>게시판</h2>
+				<ul>
+					<li><a href="">일반게시판</a></li>
+					<li><a href="">댓글게시판</a></li>
+				</ul>
 			</div>
-			<!-- //content-head -->
+			<!-- //aside -->
+			<%-- <!-- 게시판 aside -->
+         <c:import url="/WEB-INF/views/includes/asideBoard.jsp"></c:import>
+         <!-- //게시판 aside --> --%>
 
-			<div id="board">
-				<div id="list">
-					<form action="" method="">
-						<div class="form-group text-right">
-							<input type="text">
-							<button type="submit" id=btn_search>검색</button>
-						</div>
-					</form>
-					<table >
-						<thead>
-							<tr>
-								<th>번호</th>
-								<th>제목</th>
-								<th>글쓴이</th>
-								<th>조회수</th>
-								<th>작성일</th>
-								<th>관리</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>123</td>
-								<td class="text-left"><a href="#">게시판 게시글입니다.</a></td>
-								<td>정우성</td>
-								<td>1232</td>
-								<td>2020-12-23</td>
-								<td><a href="">[삭제]</a></td>
-							</tr>
-							<tr>
-								<td>123</td>
-								<td class="text-left"><a href="#">게시판 게시글입니다.</a></td>
-								<td>정우성</td>
-								<td>1232</td>
-								<td>2020-12-23</td>
-								<td><a href="">[삭제]</a></td>
-							</tr>
-							<tr>
-								<td>123</td>
-								<td class="text-left"><a href="#">게시판 게시글입니다.</a></td>
-								<td>정우성</td>
-								<td>1232</td>
-								<td>2020-12-23</td>
-								<td><a href="">[삭제]</a></td>
-							</tr>
-							<tr>
-								<td>123</td>
-								<td class="text-left"><a href="#">게시판 게시글입니다.</a></td>
-								<td>정우성</td>
-								<td>1232</td>
-								<td>2020-12-23</td>
-								<td><a href="">[삭제]</a></td>
-							</tr>
-							<tr class="last">
-								<td>123</td>
-								<td class="text-left"><a href="#">게시판 게시글입니다.</a></td>
-								<td>정우성</td>
-								<td>1232</td>
-								<td>2020-12-23</td>
-								<td><a href="">[삭제]</a></td>
-							</tr>
-						</tbody>
-					</table>
-		
-					<div id="paging">
+			<div id="content">
+
+				<div id="content-head">
+					<h3>게시판</h3>
+					<div id="location">
 						<ul>
-							<li><a href="">◀</a></li>
-							<li><a href="">1</a></li>
-							<li><a href="">2</a></li>
-							<li><a href="">3</a></li>
-							<li><a href="">4</a></li>
-							<li class="active"><a href="">5</a></li>
-							<li><a href="">6</a></li>
-							<li><a href="">7</a></li>
-							<li><a href="">8</a></li>
-							<li><a href="">9</a></li>
-							<li><a href="">10</a></li>
-							<li><a href="">▶</a></li>
+							<li>홈</li>
+							<li>게시판</li>
+							<li class="last">일반게시판</li>
 						</ul>
-						
-						
-						<div class="clear"></div>
 					</div>
-					<a id="btn_write" href="">글쓰기</a>
-				
+					<div class="clear"></div>
 				</div>
-				<!-- //list -->
-			</div>
-			<!-- //board -->
-		</div>
-		<!-- //content  -->
-		<div class="clear"></div>
+				<!-- //content-head -->
 
-		<div id="footer">
-			Copyright ⓒ 2020 황일영. All right reserved
+				<div id="board">
+					<div id="list">
+						<form action="${pageContext.request.contextPath}/board/list" method="get">
+							<div class="form-group text-right">
+								<input type="text" name="keyword" value="">
+								<button type="submit" id=btn_search>검색</button>
+							</div>
+						</form>
+						<table>
+							<thead>
+								<tr>
+									<th>번호</th>
+									<th>제목</th>
+									<th>글쓴이</th>
+									<th>조회수</th>
+									<th>작성일</th>
+									<th>관리</th>
+								</tr>
+							</thead>
+							<tbody>
+
+								<c:forEach items="${boardList}" var="boardVo">
+									<%-- <c:forEach items="${requestScope.-생략가능boardList}" var="boardVo"> 
+                        dao model에 ""안에 이름 동일--%>
+									<tr>
+										<td>${boardVo.no}</td>
+										<td class="text-left"><a
+											href="${pageContext.request.contextPath }/board/read?no=${boardVo.no}">${boardVo.title}</a></td>
+										<td>${boardVo.name}</td>
+										<td>${boardVo.hit}</td>
+										<td>${boardVo.regDate}/글작성자번호:${boardVo.userNo} /
+											세션:${sessionScope.authUser.no} ${authUser.no }</td>
+										<td>
+											<!-- 글작성자 번호 세션의 사용자 번호 같으면 삭제버튼이 보인다  --> 
+											<c:if test="${boardVo.userNo == sessionScope.authUser.no}">
+												<a
+													href="${pageContext.request.contextPath }/board/remove?no=${boardVo.no}">[삭제]</a>
+											</c:if>
+										</td>
+									</tr>
+								</c:forEach>
+
+							</tbody>
+						</table>
+
+						<div id="paging">
+							<ul>
+								<li><a href="">◀</a></li>
+								<li><a href="">1</a></li>
+								<li><a href="">2</a></li>
+								<li><a href="">3</a></li>
+								<li><a href="">4</a></li>
+								<li class="active"><a href="">5</a></li>
+								<li><a href="">6</a></li>
+								<li><a href="">7</a></li>
+								<li><a href="">8</a></li>
+								<li><a href="">9</a></li>
+								<li><a href="">10</a></li>
+								<li><a href="">▶</a></li>
+							</ul>
+
+
+							<div class="clear"></div>
+						</div>
+
+						<c:if test="${not empty authUser }">
+							<a id="btn_write"
+								href="${pageContext.request.contextPath }/board/writeForm">글쓰기</a>
+						</c:if>
+					</div>
+					<!-- //list -->
+				</div>
+				<!-- //board -->
+			</div>
+			<!-- //content  -->
+
 		</div>
-		<!-- //footer -->
+		<!-- //container  -->
+
+
+		<!-- 푸터 -->
+		<c:import url="/WEB-INF/views/include/footer.jsp"></c:import>
+		<!-- //푸터 -->
 	</div>
 	<!-- //wrap -->
 

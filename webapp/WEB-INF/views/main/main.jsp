@@ -18,7 +18,7 @@
 	<div id="wrap">
 		<c:import url="/WEB-INF/views/include/header.jsp"></c:import>
 
-		<c:import url="/WEB-INF/views/include/nav.jsp"></c:import>
+	
 
 		<!-- <div id="nav">
 			<ul>

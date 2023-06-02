@@ -47,5 +47,11 @@ public class UserService {
 		
 		userDao.updateUser(userVo);
 	}
-	
+	//아이디 체크
+	public UserVo idcheck(String id) {
+		System.out.println("UserService.getUser()");
+		UserVo userVo = userDao.selectUser(id);
+		return userVo;
+		
+	}
 }

@@ -37,9 +37,11 @@ public class BoardController {
 		
 		List<BoardVo> boardList = boardService.getList2(keyword);
 		System.out.println(boardList);
-		
+				
 		model.addAttribute("boardList",boardList);
 		return "/WEB-INF/views/board/list.jsp";
+		
 	}
+	
 	
 }

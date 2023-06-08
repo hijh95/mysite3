@@ -12,120 +12,152 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.javaex.service.UserService;
+import com.javaex.vo.JsonResult;
 import com.javaex.vo.UserVo;
 
 @Controller
+@RequestMapping(value="/user")
 public class UserController {
 
 	@Autowired
 	private UserService userService;
 
-	// 회원가입폼
-	@RequestMapping(value = "/user/joinForm", method = { RequestMethod.GET, RequestMethod.POST })
+	/* 회원가입 폼 */
+	@RequestMapping(value = "/joinForm", method = {RequestMethod.GET, RequestMethod.POST} )
 	public String joinForm() {
-
 		System.out.println("UserController.joinForm()");
-		return "/WEB-INF/views/user/joinForm.jsp";
+
+		return "user/joinForm";
 	}
-
-	// 회원가입
-	@RequestMapping(value = "/user/join", method = { RequestMethod.GET, RequestMethod.POST })
+	
+	
+	/* 회원가입 */
+	@RequestMapping(value = "/join", method = {RequestMethod.GET, RequestMethod.POST} )
 	public String join(@ModelAttribute UserVo userVo) {
-
 		System.out.println("UserController.join()");
 
-		int count = userService.join(userVo);
-		// count= 0 ;
-		System.out.println(count);
-		if (count > 0) {
-			return "/WEB-INF/views/user/joinOk.jsp";
-		} else {
-			return "redirect:/user/joinForm";
-		}
-
-		// return "/WEB-INF/views/user/joinOk.jsp";
+		userService.join(userVo);
+		
+		return "user/joinOk";
 	}
-
-	// 로그인 폼
-	@RequestMapping(value="/user/loginForm",method= {RequestMethod.GET,RequestMethod.POST})
+	
+	
+	/* 로그인 폼 */
+	@RequestMapping(value = "/loginForm", method = {RequestMethod.GET, RequestMethod.POST})
 	public String loginForm() {
 		System.out.println("UserController.loginForm()");
-		
-		return "/WEB-INF/views/user/loginForm.jsp";
-	}
 
-	// 로그인
-	@RequestMapping(value="/user/login",method= {RequestMethod.GET,RequestMethod.POST})
+		return "user/loginForm";
+	}
+	
+	
+	/* 로그인:회원정보 가져오기(세션저장용) */
+	@RequestMapping(value = "/login", method = {RequestMethod.GET, RequestMethod.POST})
 	public String login(@ModelAttribute UserVo userVo, HttpSession session) {
 		System.out.println("UserController.login()");
+
 		UserVo authUser = userService.login(userVo);
-		System.out.println(authUser);
-		if(authUser != null) {//로그인 성공했을 때
-			System.out.println("로그인 성공");
-			//세션에 저장
+
+		if (authUser != null) { // 로그인 성공일때
+			System.out.println("로그인성공");
 			session.setAttribute("authUser", authUser);
-			//메인 리다이렉트
 			return "redirect:/main";
-		}else {//로그인 실패했을 때
-			System.out.println("로그인 실패");
-			//로그인 폼으로 보냄
+			
+		} else { // 로그인 실패일때
+			System.out.println("로그인실패");
+			return "redirect:/user/loginForm?result=fail";
 			
 		}
 		
-		return "";
+		
 	}
+	
 	
 	/* 로그아웃 */
-	@RequestMapping(value="/user/logout",method= {RequestMethod.GET,RequestMethod.POST})
-	public String logout(HttpSession	session) {
-		System.out.println("UserController.login()");
+	@RequestMapping(value="/logout", method = {RequestMethod.GET, RequestMethod.POST})
+	public String logout(HttpSession session) {
+		System.out.println("UserController.logout()");
+
+		// 세션의 값을 삭제한다.
 		session.removeAttribute("authUser");
-		session.invalidate();//초기화
+		session.invalidate();
 		return "redirect:/main";
 	}
 	
-	/* 회원정보수정폼*/
-	@RequestMapping(value="/user/modifyForm",method= {RequestMethod.GET,RequestMethod.POST})
+
+	
+	/* 회원정보수정폼:선택한 번호의 회의정보를 가져오기 */
+	@RequestMapping(value="/modifyForm", method = {RequestMethod.GET, RequestMethod.POST})
 	public String modifyForm(HttpSession session, Model model) {
 		System.out.println("UserController.modifyForm()");
-		UserVo authUser=(UserVo)session.getAttribute("authUser");
-		int no =authUser.getNo();
+
+		// 세션에서 로그인한 사용자 no값 가져오기
+		int no = ((UserVo) session.getAttribute("authUser")).getNo();
+
+		// userService를 통해 로그인한 유저 모든정보 가져오기
 		UserVo userVo = userService.modifyForm(no);
-		model.addAttribute("userVo",userVo);
-		System.out.println(userVo);
-		return "/WEB-INF/views/user/modifyForm.jsp";
+
+		// Dispacher Servlet에 유저정보 전달
+		model.addAttribute("userVo", userVo);
+		
+		return "user/modifyForm";
 	}
+
 	
-	/* 회원정보 수정 */
-	@RequestMapping(value="/user/modify",method= {RequestMethod.GET,RequestMethod.POST})
+	
+	// 회원수정
+	@RequestMapping("/modify")
 	public String modify(@ModelAttribute UserVo userVo, HttpSession session) {
 		System.out.println("UserController.modify()");
-		//userVo no가없음 <--세션에서 가져올 예정
-		
-		UserVo authUser = (UserVo)session.getAttribute("authUser");
-		
-		int no= authUser.getNo();
+
+		// 세션에서 로그인한 사용자 정보 가져오기
+		UserVo authUser = (UserVo) session.getAttribute("authUser");
+
+		// 가져온 세션정보에서 로그인한 사용자 no값 가져오기
+		int no = authUser.getNo();
+
+		// 파라미터로 넘어온 사용자 정보 UserVo에로 그인한 사용자 no값 추가
 		userVo.setNo(no);
-		
-		//서비스 넘긴다  db수정
-		
-		//세션에 있는 name 변경
-		String name = userVo.getName();
-		authUser.setName(name);
+
+		// userService를 통해 로그인한 사용자 정보 수정
 		userService.modify(userVo);
+
+		// 세션에 이름 변경
+		authUser.setName(userVo.getName());
+
 		return "redirect:/main";
 	}
 	
-	//회원가입 id체크
+	
+
+	/* 회원가입 id체크 */
 	@ResponseBody
-	@RequestMapping(value="/user/idcheck",method= {RequestMethod.GET,RequestMethod.POST})
-	public UserVo idcheck(@RequestParam("id") String id) {
+	@RequestMapping(value = "/idcheck", method = { RequestMethod.GET, RequestMethod.POST })
+	public JsonResult idcheck(@RequestParam("id") String id) {
 		System.out.println("UserController.idcheck()");
 		
-		UserVo userVo = userService.idcheck(id);
+		boolean data = userService.idcheck(id);
 		
-		System.out.println(userVo);
-		return userVo;
+		JsonResult jsonResult = new JsonResult();
+		jsonResult.success(data);
+		
+		//jsonResult.fail("통신오류");
+		
+		/*
+		 *getter setter 사용한 경우 --> 잘못 사용할 가능성이 높다
+		jsonResult.setResult("success");
+		jsonResult.setData(data);
+		
+		
+		jsonResult.setResult("fail");
+		jsonResult.setFailMsg("통신오류");
+		*/
+		
+		System.out.println(jsonResult);
+		
+		return jsonResult;
 	}
+	
+	
 	
 }

@@ -1,24 +1,28 @@
 package com.javaex.vo;
 
 public class GuestbookVo {
+	
 	private int no;
 	private String name;
 	private String password;
-	private String witdate;
-	private String write;
-	
+	private String content;
+	private String regDate;
+
 	public GuestbookVo() {
-		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public GuestbookVo(int no, String name, String password, String witdate, String write) {
-		super();
+	public GuestbookVo(int no, String name, String password, String content, String regDate) {
 		this.no = no;
 		this.name = name;
 		this.password = password;
-		this.witdate = witdate;
-		this.write = write;
+		this.content = content;
+		this.regDate = regDate;
+	}
+
+	public GuestbookVo(String name, String password, String content) {
+		this.name = name;
+		this.password = password;
+		this.content = content;
 	}
 
 	public int getNo() {
@@ -45,28 +49,25 @@ public class GuestbookVo {
 		this.password = password;
 	}
 
-	public String getWitdate() {
-		return witdate;
+	public String getContent() {
+		return content;
 	}
 
-	public void setWitdate(String witdate) {
-		this.witdate = witdate;
+	public void setContent(String content) {
+		this.content = content;
 	}
 
-	public String getWrite() {
-		return write;
+	public String getRegDate() {
+		return regDate;
 	}
 
-	public void setWrite(String write) {
-		this.write = write;
+	public void setRegDate(String regDate) {
+		this.regDate = regDate;
 	}
 
 	@Override
 	public String toString() {
-		return "GuestbookVo [no=" + no + ", name=" + name + ", password=" + password + ", witdate=" + witdate
-				+ ", write=" + write + "]";
+		return "GuestbookVo [no=" + no + ", name=" + name + ", password=" + password + ", content=" + content
+				+ ", regDate=" + regDate + "]";
 	}
-	
-	
-	
 }

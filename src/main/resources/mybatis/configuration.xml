@@ -3,13 +3,11 @@
 
 <configuration>
 	<typeAliases>
-	    <typeAlias alias="UserVo" type="com.javaex.vo.UserVo" />
 	</typeAliases>
 
-	<mappers><!-- 쿼리문을 저장시켜놓는 곳 설정 -->
+	<mappers>
 		<mapper resource="mybatis/mappers/user.xml" />
-		<mapper resource="mybatis/mappers/board.xml" />
 		<mapper resource="mybatis/mappers/guestbook.xml" />
-		<!-- <mapper resource="mybatis/mappers/guestbook.xml" /> -->
+		<mapper resource="mybatis/mappers/board.xml" />
 	</mappers>
 </configuration>

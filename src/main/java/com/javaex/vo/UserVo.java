@@ -8,10 +8,10 @@ public class UserVo {
 	private String password;
 	private String name;
 	private String gender;
+
 	
 	//생성자
 	public UserVo() {
-		
 	}
 
 	public UserVo(int no, String id, String password, String name, String gender) {
@@ -22,6 +22,7 @@ public class UserVo {
 		this.gender = gender;
 	}
 
+	
 	//메소드 gs
 	public int getNo() {
 		return no;
@@ -70,6 +71,5 @@ public class UserVo {
 		return "UserVo [no=" + no + ", id=" + id + ", password=" + password + ", name=" + name + ", gender=" + gender
 				+ "]";
 	}
-	
 
 }
